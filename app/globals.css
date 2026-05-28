@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Global base styles
+   Claude Code will add your brand colours and fonts here
+   ============================================================ */
+
+:root {
+  /* Brand colours — Claude Code will replace these */
+  --color-primary: #0f172a;
+  --color-accent: #6366f1;
+  --color-background: #ffffff;
+  --color-text: #1e293b;
+  --color-muted: #64748b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-background);
+}
