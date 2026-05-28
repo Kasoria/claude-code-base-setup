@@ -7,7 +7,7 @@ Clone this repo and skip Step 1 entirely — you'll be in Step 2 within minutes.
 
 ## What's included
 
-- **Next.js 15** with App Router + TypeScript
+- **Next.js 16** with App Router + TypeScript
 - **Tailwind CSS v4** — utility-first styling, zero config
 - **4 pages** ready for your Blueprint content: Home, About, Services, Contact
 - **Privacy Policy + Imprint** pages (fill in your details)
