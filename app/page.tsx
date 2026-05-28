@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { generateMeta } from "@/app/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Home",
-  description: "Your homepage meta description.",
-};
+export const metadata = generateMeta({
+  description:
+    "Your homepage meta description — one compelling sentence about who you help and what you do.",
+  path: "/",
+});
 
 // ============================================================
 // HOMEPAGE
@@ -17,27 +18,23 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="bg-slate-50 px-6 py-24 md:py-36">
+      <section aria-labelledby="hero-heading" className="bg-slate-50 px-6 py-24 md:py-36">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Eyebrow */}
           <p className="text-indigo-600 font-semibold text-sm uppercase tracking-widest mb-4">
             For [Target Audience]
           </p>
-
-          {/* Headline — from Blueprint Step 4 */}
-          <h1 className="text-4xl md:text-6xl font-bold text-slate-900 leading-tight mb-6">
+          <h1
+            id="hero-heading"
+            className="text-4xl md:text-6xl font-bold text-slate-900 leading-tight mb-6"
+          >
             Your Hero Headline
             <br />
             <span className="text-indigo-600">Goes Here</span>
           </h1>
-
-          {/* Subheadline */}
           <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
             Your supporting sentence that reinforces the headline and speaks
             directly to the problem your ideal client has right now.
           </p>
-
-          {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/contact"
@@ -56,12 +53,11 @@ export default function HomePage() {
       </section>
 
       {/* ── SOCIAL PROOF / TRUST BAR ─────────────────────── */}
-      <section className="bg-white border-y border-slate-100 px-6 py-8">
+      <section aria-label="Clients and social proof" className="bg-white border-y border-slate-100 px-6 py-8">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-slate-500 text-sm mb-4">
             Trusted by professionals across industries
           </p>
-          {/* Claude Code will add logos or names here */}
           <div className="flex flex-wrap items-center justify-center gap-8 text-slate-400 font-medium text-sm">
             <span>Client / Company A</span>
             <span>Client / Company B</span>
@@ -72,9 +68,12 @@ export default function HomePage() {
       </section>
 
       {/* ── PROBLEM / AGITATION ──────────────────────────── */}
-      <section className="bg-white px-6 py-20">
+      <section aria-labelledby="problem-heading" className="bg-white px-6 py-20">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 text-center">
+          <h2
+            id="problem-heading"
+            className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 text-center"
+          >
             The problem your ideal client faces
           </h2>
           <p className="text-lg text-slate-600 leading-relaxed text-center">
@@ -86,25 +85,30 @@ export default function HomePage() {
       </section>
 
       {/* ── SERVICES OVERVIEW ────────────────────────────── */}
-      <section className="bg-slate-50 px-6 py-20">
+      <section aria-labelledby="services-heading" className="bg-slate-50 px-6 py-20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            <h2
+              id="services-heading"
+              className="text-3xl md:text-4xl font-bold text-slate-900 mb-4"
+            >
               How I can help
             </h2>
             <p className="text-lg text-slate-600 max-w-xl mx-auto">
               Supporting sentence about your services or approach.
             </p>
           </div>
-
-          {/* Service cards — Claude Code will populate from Blueprint */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6" role="list">
             {[1, 2, 3].map((i) => (
-              <div
+              <article
                 key={i}
+                role="listitem"
                 className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="w-12 h-12 bg-indigo-100 rounded-xl mb-6 flex items-center justify-center">
+                <div
+                  className="w-12 h-12 bg-indigo-100 rounded-xl mb-6 flex items-center justify-center"
+                  aria-hidden="true"
+                >
                   <span className="text-indigo-600 font-bold">{i}</span>
                 </div>
                 <h3 className="text-xl font-semibold text-slate-900 mb-3">
@@ -114,10 +118,9 @@ export default function HomePage() {
                   Short description of this service, the transformation it
                   delivers, and who it is for.
                 </p>
-              </div>
+              </article>
             ))}
           </div>
-
           <div className="text-center mt-10">
             <Link
               href="/services"
@@ -130,19 +133,22 @@ export default function HomePage() {
       </section>
 
       {/* ── ABOUT TEASER ─────────────────────────────────── */}
-      <section className="bg-white px-6 py-20">
+      <section aria-labelledby="about-heading" className="bg-white px-6 py-20">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Photo placeholder */}
-          <div className="bg-slate-100 rounded-2xl aspect-square flex items-center justify-center text-slate-400 text-sm">
+          <div
+            className="bg-slate-100 rounded-2xl aspect-square flex items-center justify-center text-slate-400 text-sm"
+            aria-label="Profile photo placeholder"
+          >
             Your photo here
           </div>
-
-          {/* Copy */}
           <div>
             <p className="text-indigo-600 font-semibold text-sm uppercase tracking-widest mb-3">
               About me
             </p>
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">
+            <h2
+              id="about-heading"
+              className="text-3xl font-bold text-slate-900 mb-4"
+            >
               Your name or short positioning statement
             </h2>
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -160,41 +166,52 @@ export default function HomePage() {
       </section>
 
       {/* ── TESTIMONIALS ─────────────────────────────────── */}
-      <section className="bg-slate-50 px-6 py-20">
+      <section aria-labelledby="testimonials-heading" className="bg-slate-50 px-6 py-20">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-slate-900 text-center mb-12">
+          <h2
+            id="testimonials-heading"
+            className="text-3xl font-bold text-slate-900 text-center mb-12"
+          >
             What clients say
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[1, 2].map((i) => (
-              <div
+              <figure
                 key={i}
                 className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm"
               >
-                <p className="text-slate-600 leading-relaxed mb-6 italic">
-                  "Testimonial text goes here. Claude Code will insert real
-                  testimonials you provide — keep them specific and
-                  result-focused."
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-slate-200 rounded-full" />
+                <blockquote>
+                  <p className="text-slate-600 leading-relaxed mb-6 italic">
+                    "Testimonial text goes here. Claude Code will insert real
+                    testimonials you provide — keep them specific and
+                    result-focused."
+                  </p>
+                </blockquote>
+                <figcaption className="flex items-center gap-3">
+                  <div
+                    className="w-10 h-10 bg-slate-200 rounded-full"
+                    aria-hidden="true"
+                  />
                   <div>
                     <p className="font-semibold text-slate-900 text-sm">
                       Client Name
                     </p>
                     <p className="text-slate-500 text-xs">Role / Company</p>
                   </div>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── BOTTOM CTA ───────────────────────────────────── */}
-      <section className="bg-slate-900 px-6 py-20 text-center">
+      <section aria-labelledby="cta-heading" className="bg-slate-900 px-6 py-20 text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2
+            id="cta-heading"
+            className="text-3xl md:text-4xl font-bold text-white mb-4"
+          >
             Ready to get started?
           </h2>
           <p className="text-slate-400 text-lg mb-8">

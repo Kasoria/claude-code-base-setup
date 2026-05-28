@@ -1,21 +1,35 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { generateMeta, siteConfig } from "@/app/lib/metadata";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/app/lib/schema";
 
-export const metadata: Metadata = {
+export const metadata = generateMeta({
   title: "About",
-  description: "Your about page meta description.",
-};
+  description:
+    "Learn about your name — your background, your approach, and why you do what you do.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: siteConfig.url },
+          { name: "About", url: `${siteConfig.url}/about` },
+        ])}
+      />
+
       {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="bg-slate-50 px-6 py-24">
+      <section aria-labelledby="about-hero-heading" className="bg-slate-50 px-6 py-24">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-indigo-600 font-semibold text-sm uppercase tracking-widest mb-4">
             About me
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          <h1
+            id="about-hero-heading"
+            className="text-4xl md:text-5xl font-bold text-slate-900 mb-6"
+          >
             Your name or positioning headline
           </h1>
           <p className="text-xl text-slate-600 leading-relaxed">
@@ -26,16 +40,19 @@ export default function AboutPage() {
       </section>
 
       {/* ── STORY SECTION ────────────────────────────────── */}
-      <section className="bg-white px-6 py-20">
+      <section aria-labelledby="story-heading" className="bg-white px-6 py-20">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-          {/* Photo */}
-          <div className="bg-slate-100 rounded-2xl aspect-[4/5] flex items-center justify-center text-slate-400 text-sm sticky top-24">
+          <div
+            className="bg-slate-100 rounded-2xl aspect-[4/5] flex items-center justify-center text-slate-400 text-sm sticky top-24"
+            aria-label="Profile photo"
+            role="img"
+          >
             Your photo here
           </div>
-
-          {/* Story copy */}
           <div className="space-y-6 text-slate-600 leading-relaxed">
-            <h2 className="text-2xl font-bold text-slate-900">My story</h2>
+            <h2 id="story-heading" className="text-2xl font-bold text-slate-900">
+              My story
+            </h2>
             <p>
               First paragraph — your background. Where you started, what you
               were doing, what problem you noticed or experienced yourself.
@@ -49,20 +66,21 @@ export default function AboutPage() {
               Third paragraph — where you are now and what you do for your
               clients. Bridge to your offer.
             </p>
-
-            {/* Values or approach */}
             <div className="border-t border-slate-100 pt-6">
               <h3 className="text-lg font-semibold text-slate-900 mb-4">
                 My approach
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-3" role="list">
                 {[
                   "Value or principle 1 — one sentence.",
                   "Value or principle 2 — one sentence.",
                   "Value or principle 3 — one sentence.",
-                ].map((item, i) => (
-                  <li key={i} className="flex gap-3 items-start">
-                    <span className="w-5 h-5 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+                ].map((item) => (
+                  <li key={item} className="flex gap-3 items-start">
+                    <span
+                      className="w-5 h-5 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5"
+                      aria-hidden="true"
+                    >
                       ✓
                     </span>
                     <span className="text-sm">{item}</span>
@@ -70,7 +88,6 @@ export default function AboutPage() {
                 ))}
               </ul>
             </div>
-
             <Link
               href="/contact"
               className="inline-flex items-center px-6 py-3 bg-slate-900 text-white rounded-lg font-semibold hover:bg-indigo-600 transition-colors"
@@ -82,9 +99,12 @@ export default function AboutPage() {
       </section>
 
       {/* ── CREDENTIALS / NUMBERS ────────────────────────── */}
-      <section className="bg-slate-50 px-6 py-16">
+      <section aria-labelledby="stats-heading" className="bg-slate-50 px-6 py-16">
+        <h2 id="stats-heading" className="sr-only">
+          At a glance
+        </h2>
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <dl className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { number: "0+", label: "Clients served" },
               { number: "0", label: "Years experience" },
@@ -92,13 +112,16 @@ export default function AboutPage() {
               { number: "100%", label: "Remote & flexible" },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="text-4xl font-bold text-slate-900 mb-1">
-                  {stat.number}
-                </p>
-                <p className="text-slate-500 text-sm">{stat.label}</p>
+                <dt className="sr-only">{stat.label}</dt>
+                <dd>
+                  <span className="block text-4xl font-bold text-slate-900 mb-1">
+                    {stat.number}
+                  </span>
+                  <span className="text-slate-500 text-sm">{stat.label}</span>
+                </dd>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
     </>

@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
+import { generateMeta } from "@/app/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generateMeta({
   title: "Imprint",
   description: "Legal notice / imprint.",
-};
+  path: "/imprint",
+  noIndex: true,
+});
 
 export default function ImprintPage() {
   return (

@@ -1,4 +1,9 @@
 import Link from "next/link";
+import ManagePreferencesButton from "@/components/ManagePreferencesButton";
+
+// Show the "Cookie Preferences" button only when the banner is active.
+// To activate: set NEXT_PUBLIC_COOKIE_CONSENT=true in .env.local
+const cookieBannerEnabled = process.env.NEXT_PUBLIC_COOKIE_CONSENT === "true";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -69,13 +74,14 @@ export default function Footer() {
 
         <div className="border-t border-slate-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
           <p>© {year} Your Name. All rights reserved.</p>
-          <div className="flex gap-6">
+          <div className="flex gap-6 items-center">
             <Link href="/privacy" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>
             <Link href="/imprint" className="hover:text-white transition-colors">
               Imprint
             </Link>
+            {cookieBannerEnabled && <ManagePreferencesButton />}
           </div>
         </div>
       </div>

@@ -1,21 +1,35 @@
-import type { Metadata } from "next";
+import { generateMeta, siteConfig } from "@/app/lib/metadata";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/app/lib/schema";
 import ContactForm from "@/components/ContactForm";
 
-export const metadata: Metadata = {
+export const metadata = generateMeta({
   title: "Contact",
-  description: "Get in touch — let's talk about how I can help you.",
-};
+  description:
+    "Get in touch — let's talk about how I can help you. I reply within 1–2 business days.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: siteConfig.url },
+          { name: "Contact", url: `${siteConfig.url}/contact` },
+        ])}
+      />
+
       {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="bg-slate-50 px-6 py-24">
+      <section aria-labelledby="contact-hero-heading" className="bg-slate-50 px-6 py-24">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-indigo-600 font-semibold text-sm uppercase tracking-widest mb-4">
             Contact
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          <h1
+            id="contact-hero-heading"
+            className="text-4xl md:text-5xl font-bold text-slate-900 mb-6"
+          >
             Let's talk
           </h1>
           <p className="text-xl text-slate-600 leading-relaxed">
@@ -26,14 +40,14 @@ export default function ContactPage() {
       </section>
 
       {/* ── FORM + INFO ──────────────────────────────────── */}
-      <section className="bg-white px-6 py-20">
+      <section aria-labelledby="contact-form-heading" className="bg-white px-6 py-20">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
           {/* Left: info */}
           <div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">
+            <h2 id="contact-form-heading" className="text-2xl font-bold text-slate-900 mb-6">
               How to reach me
             </h2>
-            <div className="space-y-6 text-slate-600">
+            <address className="not-italic space-y-6 text-slate-600">
               <div>
                 <p className="font-semibold text-slate-900 text-sm mb-1">
                   Email
@@ -67,12 +81,13 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-indigo-600 hover:underline"
+                    aria-label="Connect on LinkedIn (opens in new tab)"
                   >
                     LinkedIn
                   </a>
                 </div>
               </div>
-            </div>
+            </address>
           </div>
 
           {/* Right: form */}
